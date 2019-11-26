@@ -25,40 +25,11 @@ void get_package_name(char * argv1 , string * pkg_n){
     *pkg_n = pkg_ns.substr(0, pos_space);
 }
 
-void search_next_class(char * argv1 , string * classname){
-    FILE * file = fopen(argv1 , "r");
-    int found = 0 ;
-    char totalcode; int i = 0 ;
-    while((totalcode = getc(file)) != EOF){
-        if (i >4){
-            char word[6] ;
-            for (int j = i-4 ; j<= i ; j++){
-                for(int x = 0 ; x<= i-j ; x++){
-                    word[x] = totalcode ;
-                }
-                word[i-j+1] = '\0' ;
-            }
-            i=0 ;
-                string wrd (word) ;
-                if (wrd.compare("class") == 0){
-                    char classchar ;
-                    string classcode ;
-                    while((classchar = getc(file)) != '/'){
-                       classcode += classchar ;
-                    }
-                    FILE *
-                }
-            }
-        }
-        i++;
-    }
 
 
-void create_process(string cmd){
-    //pid_t pid = fork() ;
-    //if (pid == 0){
+void exec_process(string cmd){
         system(cmd.c_str()) ;
-    //}
+
 }
 
 int main(int argc, char* argv[])
@@ -76,8 +47,8 @@ int main(int argc, char* argv[])
     string main_class_name = argv1.substr(0,java) ;
     string package_name ;
     get_package_name(argv[1] , &package_name);
-    create_process(command);
+    exec_process(command);
     command2 = "java " + package_name + "." + main_class_name ;
-    create_process(command2);
+    exec_process(command2);
     return 0;
 }
